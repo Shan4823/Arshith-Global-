@@ -1,7 +1,4 @@
 import '../../styles/tailwind-home.css';
-import '../../styles/legacy/styles.css';
-import '../../styles/legacy/styles2.css';
-import './internship.css';
 
 import useScrollReveal from '../../hooks/useScrollReveal';
 

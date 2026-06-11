@@ -1,7 +1,4 @@
 import '../../styles/tailwind-home.css';
-import '../../styles/legacy/styles.css';
-import '../../styles/legacy/styles2.css';
-import './aboutceo.css';
 
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
