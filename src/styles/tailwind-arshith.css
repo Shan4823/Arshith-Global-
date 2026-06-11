@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Arshith ecosystem (ArshithInfoTech) — fully self-contained
+   Replaces: arshithinfotech.css + footer-premium.css
+   ========================================================================== */
+
+@layer base {
+  :root {
+    /* Normalized from arshithinfotech.css's --primary-color/--secondary-color/
+       --text-dark/--shadow/--font-family to the shared semantic names used in
+       tailwind.config.js (see migration plan, Architecture decision #3). */
+    --primary: #2f855a;
+    --secondary: #48bb78;
+    --bg-light: #f0fff4;
+    --bg-white: #ffffff;
+    --text-main: #22543d;
+    --text-muted: #4a5568;
+
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    --font-body: "Outfit", sans-serif;
+    --transition: all 0.3s ease-in-out;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Component classes ported from arshithinfotech.css + footer-premium.css are
+     added here in Phase 12. */
+}
+
+@layer utilities {
+  /* Custom utilities added here as needed. */
+}
