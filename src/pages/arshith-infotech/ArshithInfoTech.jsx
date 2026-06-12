@@ -1,5 +1,4 @@
-import '../../styles/legacy/footer-premium.css';
-import './arshithinfotech.css';
+import '../../styles/tailwind-arshith.css';
 
 import ArshithInfoTechNavbar from '../../components/arshith-infotech/ArshithInfoTechNavbar';
 import HeroSection from '../../components/arshith-infotech/HeroSection';

@@ -1,5 +1,4 @@
-import '../../styles/legacy/infotech.css';
-import '../../styles/legacy/footer-premium.css';
+import '../../styles/tailwind-infotech.css';
 
 import useRevealAnimations from '../../hooks/infotech/useRevealAnimations';
 import useServiceModal from '../../hooks/infotech/useServiceModal';
