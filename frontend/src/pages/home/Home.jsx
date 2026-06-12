@@ -32,7 +32,7 @@ export default function Home() {
       <PartnerAiSection />
       <OperationalGallery />
       <CareersSection />
-      <ContactSection />
+      <ContactSection sourcePage="home" />
       <Footer />
     </>
   );

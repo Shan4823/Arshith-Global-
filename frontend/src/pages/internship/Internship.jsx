@@ -33,7 +33,7 @@ export default function Internship() {
         <ApplySection />
       </div>
       <CareersSection />
-      <ContactSection />
+      <ContactSection sourcePage="internship" />
       <Footer />
     </>
   );

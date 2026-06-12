@@ -16,7 +16,7 @@ export default function LatestNews() {
       <Header infotechLinkOpenInNewTab={false} />
       <NewsSection />
       <CareersSection />
-      <ContactSection />
+      <ContactSection sourcePage="latestnews" />
       <Footer />
     </>
   );

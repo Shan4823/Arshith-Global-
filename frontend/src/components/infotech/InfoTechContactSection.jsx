@@ -1,7 +1,7 @@
 import useContactForm from '../../hooks/infotech/useContactForm';
 
 export default function InfoTechContactSection() {
-  const { submitting, submitted, handleSubmit } = useContactForm();
+  const { submitting, submitted, error, handleSubmit } = useContactForm();
 
   return (
     <section id="contact" className="section-padding contact-section">
@@ -54,27 +54,35 @@ export default function InfoTechContactSection() {
           <div className="contact-form-wrap reveal-right">
             {!submitted && (
               <form className="contact-form" id="contactForm" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex="-1"
+                  autoComplete="off"
+                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                  aria-hidden="true"
+                />
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="fname">First Name</label>
-                    <input type="text" id="fname" placeholder="Arshith" required />
+                    <input type="text" id="fname" name="firstName" placeholder="Arshith" required />
                   </div>
                   <div className="form-group">
                     <label htmlFor="lname">Last Name</label>
-                    <input type="text" id="lname" placeholder="Infotech" required />
+                    <input type="text" id="lname" name="lastName" placeholder="Infotech" required />
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Work Email</label>
-                  <input type="email" id="email" placeholder="support@arshith-infotech.com" required />
+                  <input type="email" id="email" name="email" placeholder="support@arshith-infotech.com" required />
                 </div>
                 <div className="form-group">
                   <label htmlFor="company">Company</label>
-                  <input type="text" id="company" placeholder="arshith-infotech" />
+                  <input type="text" id="company" name="company" placeholder="arshith-infotech" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="service">Service of Interest</label>
-                  <select id="service">
+                  <select id="service" name="service">
                     <option value="">Select a service...</option>
                     <option>Digital Transformation</option>
                     <option>Cloud Computing</option>
@@ -87,7 +95,7 @@ export default function InfoTechContactSection() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" rows="4" placeholder="Tell us about your project or challenge..."></textarea>
+                  <textarea id="message" name="message" rows="4" placeholder="Tell us about your project or challenge..."></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary form-submit-btn" disabled={submitting}>
                   {submitting ? (
@@ -100,6 +108,11 @@ export default function InfoTechContactSection() {
                     </>
                   )}
                 </button>
+                {error && (
+                  <p className="form-note" style={{ color: '#dc2626' }}>
+                    <i className="fas fa-exclamation-circle"></i> {error}
+                  </p>
+                )}
                 <p className="form-note">
                   <i className="fas fa-shield-alt"></i> Your information is secure and will never be shared.
                 </p>

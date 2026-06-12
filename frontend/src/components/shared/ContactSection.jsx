@@ -1,4 +1,8 @@
-export default function ContactSection() {
+import useContactForm from '../../hooks/useContactForm';
+
+export default function ContactSection({ sourcePage = '' }) {
+  const { status, errorMessage, handleSubmit } = useContactForm(sourcePage);
+
   return (
     <section className="ag-contact" id="contact">
       <div className="container">
@@ -12,7 +16,15 @@ export default function ContactSection() {
         </div>
 
         <div className="ag-contact-form-wrap">
-          <form className="ag-contact-form" id="agContactForm" noValidate>
+          <form className="ag-contact-form" id="agContactForm" noValidate onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="website"
+              tabIndex="-1"
+              autoComplete="off"
+              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+              aria-hidden="true"
+            />
             <div className="ag-form-row">
               <div className="ag-form-group">
                 <label htmlFor="contactName">Full Name</label>
@@ -56,12 +68,27 @@ export default function ContactSection() {
               ></textarea>
             </div>
             <div className="ag-form-submit-row">
-              <button type="submit" className="ag-form-btn">
-                Send Message <i className="fa-solid fa-paper-plane"></i>
+              <button type="submit" className="ag-form-btn" disabled={status === 'submitting'}>
+                {status === 'submitting' ? (
+                  <>Sending... <i className="fa-solid fa-spinner fa-spin"></i></>
+                ) : (
+                  <>Send Message <i className="fa-solid fa-paper-plane"></i></>
+                )}
               </button>
-              <p className="ag-form-success" id="agFormSuccess">
-                ✅ Thank you! We'll get back to you soon.
-              </p>
+              {status === 'success' && (
+                <p className="ag-form-success" id="agFormSuccess" style={{ display: 'block' }}>
+                  ✅ Thank you! We'll get back to you soon.
+                </p>
+              )}
+              {status === 'error' && (
+                <p
+                  className="ag-form-error"
+                  id="agFormError"
+                  style={{ display: 'block', fontSize: '0.88rem', color: '#dc2626' }}
+                >
+                  ⚠ {errorMessage}
+                </p>
+              )}
             </div>
           </form>
         </div>
