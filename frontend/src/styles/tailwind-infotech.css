@@ -2188,7 +2188,11 @@
     }
 
     .drawer-close {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
     }
 
     .drawer-brand {
@@ -2202,6 +2206,8 @@
       font-size: 1.6rem;
       color: var(--text-main);
       margin-right: 5px;
+      min-width: 44px;
+      min-height: 44px;
     }
 
     .nav-cta {
@@ -2326,6 +2332,27 @@
       margin-left: auto;
       margin-right: auto;
       max-width: 1160px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .navbar .container {
+      height: 64px;
+    }
+
+    .nav-links {
+      padding-top: 64px;
+    }
+
+    .hero {
+      padding: 96px 0 48px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.5rem;
+      line-height: 1.3;
     }
   }
 }

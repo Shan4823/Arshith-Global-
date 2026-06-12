@@ -310,6 +310,26 @@
     }
     .ag-hamburger {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ag-nav {
+      height: 64px;
+    }
+    .ag-logo-img {
+      height: 42px;
+    }
+    .ag-nav-links {
+      top: 64px;
+      max-height: calc(100vh - 64px);
+    }
+    .ag-dropdown {
+      top: 64px;
     }
   }
 
@@ -746,6 +766,7 @@
     width: 100%;
     height: 85vh;
     min-height: 600px;
+    margin-top: 90px;
     overflow: hidden;
     background: #fdfaf6;
     display: flex;
@@ -965,6 +986,12 @@
     }
     .cinematic-controls {
       display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-cinematic {
+      margin-top: 64px;
     }
   }
 

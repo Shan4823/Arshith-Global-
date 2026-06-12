@@ -55,7 +55,7 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <section className="hero-cinematic" id="heroCinematic" style={{ marginTop: '80px' }}>
+    <section className="hero-cinematic" id="heroCinematic">
       {slides.map((slide, i) => (
         <div className={`cinematic-slide${i === current ? ' active' : ''}`} key={slide.title}>
           <div
