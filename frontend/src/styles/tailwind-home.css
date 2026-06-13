@@ -1352,6 +1352,9 @@
     .timeline-section {
       padding: 90px 6%;
     }
+    .timeline-header {
+      margin-bottom: 50px;
+    }
     .timeline-title {
       font-size: 32px;
     }

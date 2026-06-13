@@ -159,6 +159,4 @@ deliberately preserves, per the zero-visual-change requirement:
   `.ag-footer-cols`/`.ag-footer-inner`/`.ag-footer-brand p` all resolve to the
   expected cascade-merged values at both desktop and mobile viewport widths.
 
-## Notes
-- This work is currently uncommitted in the local working tree (no remote
-  configured; nothing has been pushed to GitHub).
+

@@ -72,7 +72,7 @@ export default function EvolutionTimeline() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
-          start: 'top 65%',
+          start: 'top 85%',
           toggleActions: 'play none none reverse',
         },
       });
@@ -92,7 +92,12 @@ export default function EvolutionTimeline() {
       if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
     });
 
+    ScrollTrigger.refresh();
+    const handleResize = () => ScrollTrigger.refresh();
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       triggers.forEach((trigger) => trigger.kill());
     };
   }, []);
