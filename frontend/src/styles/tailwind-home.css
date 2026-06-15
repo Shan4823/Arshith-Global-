@@ -2695,6 +2695,14 @@
     .mncfix-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+
+    /* Two-card layout (e.g. internship duration plans) centered instead
+       of filling a 3-column track and leaving the last column empty. */
+    .mncfix-grid--duo {
+      max-width: 732px;
+      margin: 0 auto;
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .mncfix-card {

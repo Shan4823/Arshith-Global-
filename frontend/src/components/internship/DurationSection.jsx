@@ -23,7 +23,7 @@ export default function DurationSection() {
         </div>
 
         <motion.div
-          className="mncfix-grid"
+          className="mncfix-grid mncfix-grid--duo"
           variants={fadeUpStagger}
           initial="hidden"
           whileInView="show"
