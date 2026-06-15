@@ -3,16 +3,14 @@ import '../../styles/tailwind-home.css';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
 import Header from '../../components/layout/Header';
-import Footer from '../../components/layout/Footer';
-import CareersSection from '../../components/shared/CareersSection';
-import ContactSection from '../../components/shared/ContactSection';
+import FarmFooter from '../../components/shared/FarmFooter';
 import InternshipHero from '../../components/internship/InternshipHero';
 import OverviewSection from '../../components/internship/OverviewSection';
 import GainSection from '../../components/internship/GainSection';
 import BenefitsSection from '../../components/internship/BenefitsSection';
 import DurationSection from '../../components/internship/DurationSection';
-import OpportunitiesSection from '../../components/internship/OpportunitiesSection';
 import ApplySection from '../../components/internship/ApplySection';
+import VideoCtaSection from '../../components/shared/VideoCtaSection';
 
 export default function Internship() {
   useScrollReveal();
@@ -29,12 +27,15 @@ export default function Internship() {
         <GainSection />
         <BenefitsSection />
         <DurationSection />
-        <OpportunitiesSection />
         <ApplySection />
+        <VideoCtaSection
+          heading="Ready to launch your career?"
+          subtext="Apply now and take the first step toward a portfolio-ready, mentor-guided internship."
+          ctaLabel="Apply Now →"
+          ctaHref="internship-details.html"
+        />
       </div>
-      <CareersSection />
-      <ContactSection sourcePage="internship" />
-      <Footer />
+      <FarmFooter />
     </>
   );
 }

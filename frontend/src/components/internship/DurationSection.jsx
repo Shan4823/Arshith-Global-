@@ -1,3 +1,13 @@
+import { motion } from 'framer-motion';
+import {
+  fadeUp,
+  fadeUpStagger,
+  popIn,
+  popInStagger,
+  tapScale,
+  VIEWPORT_ONCE,
+} from '../../lib/motion';
+
 export default function DurationSection() {
   return (
     <section className="section">
@@ -12,68 +22,66 @@ export default function DurationSection() {
           </p>
         </div>
 
-        <div className="mncfix-grid">
-          <div className="mncfix-card">
-            <div className="mncfix-ico">3 Months</div>
-            <h3>Most Popular – Paid Program</h3>
-            <p>
-              In this program, students will work on multiple UI components, receive reviews,
-              and build responsive pages while gaining deeper practical experience. This program
-              focuses on real-time project experience and advanced practical learning.
-              <br />
-            </p>
+        <motion.div
+          className="mncfix-grid"
+          variants={fadeUpStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+        >
+          <motion.div className="mncfix-card-reveal" variants={fadeUp}>
+            <div className="mncfix-card mncfix-card--featured">
+              <motion.div
+                className="mncfix-tags"
+                variants={popInStagger}
+                initial="hidden"
+                whileInView="show"
+                viewport={VIEWPORT_ONCE}
+              >
+                <motion.span className="mncfix-tag mncfix-tag--accent" variants={popIn}>
+                  Most Popular
+                </motion.span>
+              </motion.div>
+              <div className="mncfix-ico">3 Months</div>
+              <h3>3-Month Program</h3>
+              <p className="mncfix-price">₹1,250</p>
+              <p>
+                Work on multiple UI components, receive reviews, and build responsive pages while
+                gaining practical, hands-on front-end development experience.
+              </p>
+              <motion.a href="internship-details.html" className="mncfix-apply-btn" {...tapScale}>
+                Apply Now →
+              </motion.a>
+            </div>
+          </motion.div>
 
-            <strong>
-              Work on real-time projects
-              <br />
-              Build multiple responsive pages
-              <br />
-              Portfolio development
-              <br />
-              Practical implementation and workflows
-              <br />
-              <h3>Note:</h3>
-              No Placement Included <br />
-              <strong>
-                <h3>Registration Fee Only: ₹1,250</h3>
-              </strong>
-            </strong>
-          </div>
-          <div className="mncfix-card">
-            <div className="mncfix-ico">6 Months</div>
-            <h3>Advanced – Paid Program </h3>
-            <p>
-              This program is designed for undergraduate students, including both Degree and
-              B.Tech students, with a primary focus on 3rd Year B.Tech pursuing students.
-            </p>
-            <strong>
-              real-time project development
-              <br />
-              Industry-standard advanced training
-              <br />
-              High-level practical exposure
-              <br />
-              Team collaboration &amp; workflow
-              <br />
-              Portfolio + project deployment{' '}
-            </strong>
-            <br />
-            <h3>Placement Opportunity:</h3>
-            Only students who have successfully completed this 6-month internship program in our
-            companies will be eligible to participate in future campus recruitment drives
-            conducted by our organizations.
-            <br />
-            <strong>
-              <h3>Registration Fee Only: ₹1,999</h3>
-            </strong>
-            <a
-              href="https://arshithfresh.com/pages/internship-details"
-              className="mncfix-apply-btn"
-            >
-              Apply Now →
-            </a>
-          </div>
-        </div>
+          <motion.div className="mncfix-card-reveal" variants={fadeUp}>
+            <div className="mncfix-card">
+              <motion.div
+                className="mncfix-tags"
+                variants={popInStagger}
+                initial="hidden"
+                whileInView="show"
+                viewport={VIEWPORT_ONCE}
+              >
+                <motion.span className="mncfix-tag" variants={popIn}>Advanced</motion.span>
+                <motion.span className="mncfix-tag mncfix-tag--accent" variants={popIn}>
+                  Placement Opportunity
+                </motion.span>
+              </motion.div>
+              <div className="mncfix-ico">6 Months</div>
+              <h3>6-Month Program</h3>
+              <p className="mncfix-price">₹1,999</p>
+              <p>
+                In-depth, industry-standard training with real-time project development, team
+                collaboration, portfolio building, and eligibility for future placement drives.
+              </p>
+              <motion.a href="internship-details.html" className="mncfix-apply-btn" {...tapScale}>
+                Apply Now →
+              </motion.a>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -67,7 +67,7 @@ export default function Header({
               Careers <i className="fa-solid fa-chevron-down ag-caret"></i>
             </a>
             <div className="ag-dropdown">
-              <a href="https://arshithfresh.com/pages/internship">Internship</a>
+              <a href="internship.html">Internship</a>
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuJ0Gypsx9tuPK9jHDwNQchAXFtykeKWD7NPBb_VxilLdYwA/viewform?usp=publish-editor">
                 Technical Confirmation
               </a>
