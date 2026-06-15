@@ -2750,6 +2750,44 @@
     transform: scale(1.06);
   }
 
+  /* ── Duration card badge (e.g. "3 Months") ── */
+  .mncfix-duration-badge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 96px;
+    padding: 14px 22px;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    background: var(--brand-grad-soft);
+    box-shadow: inset 0 0 0 2px rgba(0, 108, 73, 0.18);
+    color: var(--brand);
+    text-align: center;
+    transition:
+      box-shadow 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  .mncfix-duration-badge-num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .mncfix-duration-badge-unit {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .mncfix-card:hover .mncfix-duration-badge {
+    box-shadow: inset 0 0 0 2px rgba(0, 108, 73, 0.35);
+    transform: scale(1.06);
+  }
+
   .mncfix-card h3 {
     margin-bottom: 12px;
   }

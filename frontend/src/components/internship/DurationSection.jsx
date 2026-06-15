@@ -42,7 +42,10 @@ export default function DurationSection() {
                   Most Popular
                 </motion.span>
               </motion.div>
-              <div className="mncfix-ico">3 Months</div>
+              <div className="mncfix-duration-badge">
+                <span className="mncfix-duration-badge-num">3</span>
+                <span className="mncfix-duration-badge-unit">Months</span>
+              </div>
               <h3>3-Month Program</h3>
               <p className="mncfix-price">₹1,250</p>
               <p>
@@ -69,7 +72,10 @@ export default function DurationSection() {
                   Placement Opportunity
                 </motion.span>
               </motion.div>
-              <div className="mncfix-ico">6 Months</div>
+              <div className="mncfix-duration-badge">
+                <span className="mncfix-duration-badge-num">6</span>
+                <span className="mncfix-duration-badge-unit">Months</span>
+              </div>
               <h3>6-Month Program</h3>
               <p className="mncfix-price">₹1,999</p>
               <p>
