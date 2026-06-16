@@ -11,6 +11,7 @@ import BenefitsSection from '../../components/internship/BenefitsSection';
 import DurationSection from '../../components/internship/DurationSection';
 import ApplySection from '../../components/internship/ApplySection';
 import VideoCtaSection from '../../components/shared/VideoCtaSection';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function Internship() {
   useScrollReveal();
@@ -36,6 +37,7 @@ export default function Internship() {
         />
       </div>
       <FarmFooter />
+      <ChatWidget />
     </>
   );
 }

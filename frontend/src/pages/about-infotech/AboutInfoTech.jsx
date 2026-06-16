@@ -7,6 +7,7 @@ import InfoTechNavbar from '../../components/infotech/InfoTechNavbar';
 import InfoTechFooter from '../../components/infotech/InfoTechFooter';
 import BackToTop from '../../components/infotech/BackToTop';
 import CookieBanner from '../../components/infotech/CookieBanner';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 import AboutHeroSection from '../../components/about-infotech/AboutHeroSection';
 import GlobalStatsSection from '../../components/about-infotech/GlobalStatsSection';
@@ -35,6 +36,7 @@ export default function AboutInfoTech() {
       <InfoTechFooter />
       <BackToTop />
       <CookieBanner />
+      <ChatWidget />
     </>
   );
 }

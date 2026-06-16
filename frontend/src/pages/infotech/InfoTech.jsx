@@ -21,6 +21,7 @@ import FloatingCta from '../../components/infotech/FloatingCta';
 import BackToTop from '../../components/infotech/BackToTop';
 import ServiceModal from '../../components/infotech/ServiceModal';
 import CookieBanner from '../../components/infotech/CookieBanner';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function InfoTech() {
   useRevealAnimations();
@@ -46,6 +47,7 @@ export default function InfoTech() {
       <BackToTop />
       <ServiceModal activeKey={activeKey} onClose={closeModal} />
       <CookieBanner />
+      <ChatWidget />
     </>
   );
 }

@@ -15,6 +15,7 @@ import PartnerAiSection from '../../components/home/PartnerAiSection';
 import OperationalGallery from '../../components/home/OperationalGallery';
 import CareersSection from '../../components/shared/CareersSection';
 import ContactSection from '../../components/shared/ContactSection';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function Home() {
   useScrollReveal();
@@ -34,6 +35,7 @@ export default function Home() {
       <CareersSection />
       <ContactSection sourcePage="home" />
       <Footer />
+      <ChatWidget />
     </>
   );
 }

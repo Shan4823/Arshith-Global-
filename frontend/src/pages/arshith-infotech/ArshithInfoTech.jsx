@@ -10,6 +10,7 @@ import InternshipHighlightsSection from '../../components/arshith-infotech/Inter
 import CollaborationSection from '../../components/arshith-infotech/CollaborationSection';
 import ContactInfoSection from '../../components/arshith-infotech/ContactInfoSection';
 import Footer from '../../components/layout/Footer';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function ArshithInfoTech() {
   return (
@@ -24,6 +25,7 @@ export default function ArshithInfoTech() {
       <CollaborationSection />
       <ContactInfoSection />
       <Footer enableBackToTop={false} />
+      <ChatWidget />
     </>
   );
 }

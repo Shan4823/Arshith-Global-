@@ -6,6 +6,7 @@ import AboutHero from '../../components/aboutceo/AboutHero';
 import StorySection from '../../components/aboutceo/StorySection';
 import LeadershipSection from '../../components/aboutceo/LeadershipSection';
 import StatsSection from '../../components/aboutceo/StatsSection';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function AboutCeo() {
   return (
@@ -20,6 +21,7 @@ export default function AboutCeo() {
       </main>
 
       <Footer />
+      <ChatWidget />
     </>
   );
 }

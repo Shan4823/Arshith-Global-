@@ -10,3 +10,14 @@ export const formRateLimiter = rateLimit({
     message: 'Too many submissions from this IP. Please try again in a minute.',
   },
 });
+
+export const chatRateLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: 'Too many messages from this IP. Please slow down.',
+  },
+});

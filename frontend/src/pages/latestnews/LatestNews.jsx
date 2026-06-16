@@ -7,6 +7,7 @@ import Footer from '../../components/layout/Footer';
 import CareersSection from '../../components/shared/CareersSection';
 import ContactSection from '../../components/shared/ContactSection';
 import NewsSection from '../../components/latestnews/NewsSection';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function LatestNews() {
   useScrollReveal();
@@ -18,6 +19,7 @@ export default function LatestNews() {
       <CareersSection />
       <ContactSection sourcePage="latestnews" />
       <Footer />
+      <ChatWidget />
     </>
   );
 }

@@ -15,6 +15,7 @@ import RegistrationSection from '../../components/internship-details/Registratio
 import ApplySection from '../../components/internship-details/ApplySection';
 import VideoCtaSection from '../../components/shared/VideoCtaSection';
 import { INTERNSHIP_APPLY_FORM_URL } from '../../lib/constants';
+import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function InternshipDetails() {
   useScrollReveal();
@@ -45,6 +46,7 @@ export default function InternshipDetails() {
         />
       </div>
       <FarmFooter />
+      <ChatWidget />
     </>
   );
 }

@@ -6,14 +6,14 @@ import connectDB from './src/config/db.js';
 
 const PORT = process.env.PORT || 5000;
 
-async function start() {
-  await connectDB();
-  app.listen(PORT, () => {
-    console.log(`[server] Listening on port ${PORT}`);
-  });
-}
+// Start HTTP server immediately — routes that don't need MongoDB (e.g. /api/chat)
+// remain available even if the DB connection is temporarily down.
+app.listen(PORT, () => {
+  console.log(`[server] Listening on port ${PORT}`);
+});
 
-start().catch((err) => {
-  console.error('[server] Failed to start:', err);
-  process.exit(1);
+// Connect to MongoDB in the background; contact/enquiry routes will error naturally
+// if a request arrives before the connection is established.
+connectDB().catch((err) => {
+  console.error('[server] MongoDB connection failed:', err.message);
 });
