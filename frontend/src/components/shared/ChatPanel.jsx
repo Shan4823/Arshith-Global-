@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 
 // ─── Theme tokens (scoped — never touches page CSS variables) ─────────────────
 const LIGHT = {
@@ -198,20 +199,132 @@ function Bubble({ msg, t }) {
   );
 }
 
+// ─── Chatbot Three.js particle background (welcome screen only) ───────────────
+function ChatbotParticles({ isDark }) {
+  const mountRef = useRef(null);
+
+  useEffect(() => {
+    const el = mountRef.current;
+    if (!el) return;
+
+    const w = el.clientWidth || 360;
+    const h = el.clientHeight || 400;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 500);
+    camera.position.z = 60;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    el.appendChild(renderer.domElement);
+
+    const COLOR = isDark ? 0x4ade80 : 0x3db256;
+    const COUNT = 28;
+
+    const posArr = new Float32Array(COUNT * 3);
+    const velArr = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      posArr[i * 3]     = (Math.random() - 0.5) * 110;
+      posArr[i * 3 + 1] = (Math.random() - 0.5) * 80;
+      posArr[i * 3 + 2] = (Math.random() - 0.5) * 10;
+      velArr[i * 3]     = (Math.random() - 0.5) * 0.04;
+      velArr[i * 3 + 1] = (Math.random() - 0.5) * 0.04;
+    }
+
+    const ptGeo = new THREE.BufferGeometry();
+    ptGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+    const ptMat = new THREE.PointsMaterial({ size: 1.6, color: COLOR, transparent: true, opacity: 0.6 });
+    scene.add(new THREE.Points(ptGeo, ptMat));
+
+    const MAX_SEGS = COUNT * 4;
+    const linePosArr = new Float32Array(MAX_SEGS * 6);
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePosArr, 3));
+    lineGeo.setDrawRange(0, 0);
+    const lineMat = new THREE.LineBasicMaterial({ color: COLOR, transparent: true, opacity: isDark ? 0.18 : 0.13 });
+    scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+    const THRESH_SQ = 26 * 26;
+    let frameId;
+
+    const animate = () => {
+      frameId = requestAnimationFrame(animate);
+      for (let i = 0; i < COUNT; i++) {
+        const ix = i * 3;
+        posArr[ix]     += velArr[ix];
+        posArr[ix + 1] += velArr[ix + 1];
+        if (Math.abs(posArr[ix])     > 56) velArr[ix]     *= -1;
+        if (Math.abs(posArr[ix + 1]) > 42) velArr[ix + 1] *= -1;
+      }
+      ptGeo.attributes.position.needsUpdate = true;
+
+      let seg = 0;
+      for (let i = 0; i < COUNT && seg < MAX_SEGS; i++) {
+        for (let j = i + 1; j < COUNT && seg < MAX_SEGS; j++) {
+          const dx = posArr[i*3] - posArr[j*3];
+          const dy = posArr[i*3+1] - posArr[j*3+1];
+          if (dx*dx + dy*dy < THRESH_SQ) {
+            const b = seg * 6;
+            linePosArr[b]   = posArr[i*3];   linePosArr[b+1] = posArr[i*3+1]; linePosArr[b+2] = posArr[i*3+2];
+            linePosArr[b+3] = posArr[j*3];   linePosArr[b+4] = posArr[j*3+1]; linePosArr[b+5] = posArr[j*3+2];
+            seg++;
+          }
+        }
+      }
+      lineGeo.attributes.position.needsUpdate = true;
+      lineGeo.setDrawRange(0, seg * 2);
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    const onResize = () => {
+      const nw = el.clientWidth || 360;
+      const nh = el.clientHeight || 400;
+      camera.aspect = nw / nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw, nh);
+    };
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('resize', onResize);
+      ptGeo.dispose(); ptMat.dispose();
+      lineGeo.dispose(); lineMat.dispose();
+      renderer.dispose();
+      if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement);
+    };
+  }, [isDark]);
+
+  return (
+    <div
+      ref={mountRef}
+      aria-hidden="true"
+      style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}
+    />
+  );
+}
+
 // ─── Welcome screen ───────────────────────────────────────────────────────────
-function WelcomeScreen({ onSuggest, t }) {
+function WelcomeScreen({ onSuggest, t, isDark }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       style={{
+        position: 'relative',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         padding: '20px 14px 10px', gap: 16, flex: 1, overflowY: 'auto',
       }}
     >
-      {/* Hero */}
-      <div style={{ textAlign: 'center' }}>
+      {/* Three.js particle background */}
+      <ChatbotParticles isDark={isDark} />
+
+      {/* Hero — sits above the canvas */}
+      <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
         <motion.div
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -247,6 +360,7 @@ function WelcomeScreen({ onSuggest, t }) {
         style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7,
           width: '100%', maxWidth: 320,
+          position: 'relative', zIndex: 1,
         }}
       >
         {SUGGESTIONS.map((s, i) => (
@@ -574,7 +688,7 @@ export default function ChatPanel({
         background: t.surface, padding: activeMessages.length === 0 && !isLoading ? 0 : '10px 12px 4px',
       }}>
         {activeMessages.length === 0 && !isLoading ? (
-          <WelcomeScreen onSuggest={text => { sendMessage(text); }} t={t} />
+          <WelcomeScreen onSuggest={text => { sendMessage(text); }} t={t} isDark={isDark} />
         ) : (
           <>
             {activeMessages.map((msg, i) => (

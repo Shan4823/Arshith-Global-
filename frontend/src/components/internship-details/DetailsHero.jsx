@@ -3,7 +3,6 @@ import { fadeUp, heroStagger, tapScale, floatLoop, VIEWPORT_ONCE } from '../../l
 import { INTERNSHIP_DOMAINS } from '../../lib/internshipDomains';
 import RotatingText from '../shared/RotatingText';
 import ThreeParticles from '../shared/ThreeParticles';
-import ThreeGlobe from '../shared/ThreeGlobe';
 
 const quickFacts = [
   { icon: '🏢', label: 'Arshith Fresh India Pvt. Ltd.' },
@@ -88,9 +87,11 @@ export default function DetailsHero() {
                 className="mncfix-hero-media-frame"
                 {...floatLoop(0.6, 6, 12)}
                 whileHover={{ scale: 1.03 }}
-                style={{ display: 'block' }}
               >
-                <ThreeGlobe />
+                <img
+                  src="/assets/images/tech-abstract.png"
+                  alt="Technology stack and tools covered in the internship program"
+                />
               </motion.div>
 
               <motion.div

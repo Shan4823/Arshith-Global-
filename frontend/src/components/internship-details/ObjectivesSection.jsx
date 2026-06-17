@@ -29,6 +29,7 @@ export default function ObjectivesSection() {
       title="Program Objectives"
       description="The core goals that guide every part of this internship program."
       cards={cards}
+      variant="quad"
     />
   );
 }

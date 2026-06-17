@@ -3,7 +3,6 @@ import { fadeUp, heroStagger, tapScale, floatLoop } from '../../lib/motion';
 import { INTERNSHIP_DOMAINS } from '../../lib/internshipDomains';
 import RotatingText from '../shared/RotatingText';
 import ThreeParticles from '../shared/ThreeParticles';
-import ThreeGlobe from '../shared/ThreeGlobe';
 
 const statItems = [
   { value: '100%', label: 'Hands-on' },
@@ -107,14 +106,12 @@ export default function InternshipHero() {
           <motion.div className="mncfix-hero-media" variants={fadeUp}>
             <span className="mncfix-hero-media-glow" aria-hidden="true" />
 
-            {/* Globe replaces static image */}
             <motion.div
               className="mncfix-hero-media-frame"
               {...floatLoop(0.6, 6, 12)}
               whileHover={{ scale: 1.03 }}
-              style={{ display: 'block' }}
             >
-              <ThreeGlobe />
+              <img src="/assets/images/hero-office.png" alt="Interns collaborating on a front-end project" />
             </motion.div>
 
             {/* Float card A */}

@@ -29,6 +29,7 @@ export default function HighlightsSection() {
       title="Program Highlights"
       description="What makes this internship different from a typical classroom course."
       cards={cards}
+      variant="quad"
     />
   );
 }

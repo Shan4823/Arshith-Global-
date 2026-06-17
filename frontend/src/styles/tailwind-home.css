@@ -2703,6 +2703,12 @@
       margin: 0 auto;
       grid-template-columns: repeat(2, 1fr);
     }
+
+    /* Four-card 2×2 layout — avoids the orphaned-card problem when a section
+       has exactly 4 items and would otherwise leave one card alone in row 2. */
+    .mncfix-grid--quad {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .mncfix-card {
