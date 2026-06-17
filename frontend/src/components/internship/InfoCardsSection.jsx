@@ -53,7 +53,7 @@ function TiltCard({ children }) {
   );
 }
 
-export default function InfoCardsSection({ id, title, description, cards, variant }) {
+export default function InfoCardsSection({ id, title, description, cards, variant, kicker }) {
   const gridClass =
     variant === 'steps' ? 'mncfix-grid mncfix-grid--steps' :
     variant === 'quad'  ? 'mncfix-grid mncfix-grid--quad'  :
@@ -69,6 +69,7 @@ export default function InfoCardsSection({ id, title, description, cards, varian
           viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
+          {kicker && <span className="mncfix-kicker">{kicker}</span>}
           <h2>{title}</h2>
           <p>{description}</p>
         </motion.div>
@@ -97,7 +98,7 @@ export default function InfoCardsSection({ id, title, description, cards, varian
                   }}
                   transition={{ duration: 0.25 }}
                 >
-                  <div className="mncfix-ico">{card.icon}</div>
+                  <div className={`mncfix-ico${card.color ? ` mncfix-ico--${card.color}` : ''}`}>{card.icon}</div>
                   <h3>{card.heading}</h3>
                   {card.skills ? (
                     <motion.div
@@ -136,7 +137,7 @@ export default function InfoCardsSection({ id, title, description, cards, varian
                     transition={{ duration: 0.25 }}
                   >
                     <motion.div
-                      className="mncfix-ico"
+                      className={`mncfix-ico${card.color ? ` mncfix-ico--${card.color}` : ''}`}
                       whileHover={{ scale: 1.18, rotate: [0, -6, 6, 0] }}
                       transition={{ duration: 0.38 }}
                     >

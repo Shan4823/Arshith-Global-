@@ -25,6 +25,7 @@ export default function RegistrationSection() {
     <section className="section">
       <div className="container">
         <div className="head">
+          <span className="mncfix-kicker">Get started</span>
           <h2>Registration Details</h2>
         </div>
         <div className="mncfix-reg-layout">

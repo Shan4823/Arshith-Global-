@@ -36,6 +36,7 @@ const cards = [
 export default function ModulesSection() {
   return (
     <InfoCardsSection
+      kicker="Curriculum"
       title="Learning Modules"
       description="A structured curriculum covering documentation, development, deployment, and professional skills."
       cards={cards}

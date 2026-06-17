@@ -8,6 +8,7 @@ export default function DurationInfoSection() {
       <span className="mncfix-blob mncfix-blob--gold mncfix-blob--c" aria-hidden="true"></span>
       <div className="container">
         <div className="head">
+          <span className="mncfix-kicker">Program length</span>
           <h2>Internship Duration</h2>
           <p>
             6 months duration, ensuring in-depth learning, project exposure, and skill

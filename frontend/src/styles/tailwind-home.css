@@ -2304,8 +2304,52 @@
   }
 
   .mncfix h1,
-  .mncfix h2 {
+  .mncfix h2,
+  .mncfix h3,
+  .mncfix h4,
+  .mncfix h5,
+  .mncfix h6 {
     font-family: "Plus Jakarta Sans", sans-serif;
+  }
+
+  .mncfix h2 {
+    font-weight: 800;
+    letter-spacing: -0.015em;
+  }
+
+  .mncfix h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--txt);
+  }
+
+  .mncfix h4 {
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    color: var(--txt);
+  }
+
+  /* ── Section kicker — small decorative label above section headings ── */
+  .mncfix-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+
+  .mncfix-kicker::before,
+  .mncfix-kicker::after {
+    content: "";
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--brand-grad);
   }
 
   .mncfix .container {
@@ -2324,7 +2368,14 @@
 
   .mncfix .head h2 {
     margin-bottom: 12px;
-    font-size: clamp(24px, 3vw, 36px);
+    font-size: clamp(26px, 3.4vw, 40px);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 55%, var(--gold) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
   }
 
   .mncfix .head p {
@@ -2745,9 +2796,9 @@
     border-radius: 18px;
     display: grid;
     place-items: center;
-    background: var(--brand-grad-soft);
-    box-shadow: inset 0 0 0 2px rgba(0, 108, 73, 0.18);
-    color: var(--brand);
+    background: var(--ico-bg, var(--brand-grad-soft));
+    box-shadow: inset 0 0 0 2px var(--ico-ring, rgba(0, 108, 73, 0.18));
+    color: var(--ico-color, var(--brand));
     font-weight: 800;
     font-size: 1.8rem;
     transition:
@@ -2760,8 +2811,51 @@
   }
 
   .mncfix-card:hover .mncfix-ico {
-    box-shadow: inset 0 0 0 2px rgba(0, 108, 73, 0.35);
+    box-shadow: inset 0 0 0 2px var(--ico-ring-hover, rgba(0, 108, 73, 0.35));
     transform: scale(1.06);
+  }
+
+  /* ── Colorful icon variants — keeps each feature card visually distinct ── */
+  .mncfix-ico--teal {
+    --ico-bg: linear-gradient(135deg, rgba(20, 184, 166, 0.16), rgba(6, 182, 212, 0.18));
+    --ico-color: #0d9488;
+    --ico-ring: rgba(13, 148, 136, 0.28);
+    --ico-ring-hover: rgba(13, 148, 136, 0.48);
+  }
+
+  .mncfix-ico--purple {
+    --ico-bg: linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(99, 102, 241, 0.18));
+    --ico-color: #7c3aed;
+    --ico-ring: rgba(124, 58, 237, 0.28);
+    --ico-ring-hover: rgba(124, 58, 237, 0.48);
+  }
+
+  .mncfix-ico--orange {
+    --ico-bg: linear-gradient(135deg, rgba(251, 146, 60, 0.18), rgba(249, 115, 22, 0.18));
+    --ico-color: #ea580c;
+    --ico-ring: rgba(234, 88, 12, 0.28);
+    --ico-ring-hover: rgba(234, 88, 12, 0.48);
+  }
+
+  .mncfix-ico--pink {
+    --ico-bg: linear-gradient(135deg, rgba(244, 114, 182, 0.18), rgba(236, 72, 153, 0.18));
+    --ico-color: #db2777;
+    --ico-ring: rgba(219, 39, 119, 0.28);
+    --ico-ring-hover: rgba(219, 39, 119, 0.48);
+  }
+
+  .mncfix-ico--blue {
+    --ico-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.18), rgba(59, 130, 246, 0.18));
+    --ico-color: #2563eb;
+    --ico-ring: rgba(37, 99, 235, 0.28);
+    --ico-ring-hover: rgba(37, 99, 235, 0.48);
+  }
+
+  .mncfix-ico--gold {
+    --ico-bg: linear-gradient(135deg, rgba(250, 204, 21, 0.22), rgba(245, 158, 11, 0.18));
+    --ico-color: #b45309;
+    --ico-ring: rgba(180, 83, 9, 0.28);
+    --ico-ring-hover: rgba(180, 83, 9, 0.48);
   }
 
   /* ── Duration card badge (e.g. "3 Months") ── */
@@ -2888,6 +2982,13 @@
   .mncfix-apply h2 {
     font-size: clamp(26px, 3vw, 38px);
     margin-bottom: 14px;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 55%, var(--gold) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
   }
 
   .mncfix-apply p {

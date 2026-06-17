@@ -5,9 +5,9 @@ import RotatingText from '../shared/RotatingText';
 import ThreeParticles from '../shared/ThreeParticles';
 
 const quickFacts = [
-  { icon: '🏢', label: 'Arshith Fresh India Pvt. Ltd.' },
-  { icon: '💻', label: 'Suntech Solutions' },
-  { icon: '🎓', label: '3rd Year B.Tech / Degree Students' },
+  { icon: 'fa-building', label: 'Arshith Fresh India Pvt. Ltd.' },
+  { icon: 'fa-laptop-code', label: 'Suntech Solutions' },
+  { icon: 'fa-graduation-cap', label: '3rd Year B.Tech / Degree Students' },
 ];
 
 export default function DetailsHero() {
@@ -68,7 +68,7 @@ export default function DetailsHero() {
                       backdropFilter: 'blur(4px)',
                     }}
                   >
-                    <span style={{ fontSize: 16 }}>{icon}</span> {label}
+                    <i className={`fa-solid ${icon}`} style={{ fontSize: 14, color: '#3db256' }} aria-hidden="true" /> {label}
                   </motion.div>
                 ))}
               </motion.div>

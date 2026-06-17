@@ -14,6 +14,7 @@ export default function StudentBenefitsSection() {
     <section className="section">
       <div className="container">
         <div className="head">
+          <span className="mncfix-kicker">Your takeaway</span>
           <h2>Student Benefits</h2>
         </div>
         <motion.ul

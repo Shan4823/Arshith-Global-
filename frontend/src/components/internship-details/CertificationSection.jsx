@@ -12,6 +12,7 @@ export default function CertificationSection() {
     <section className="section">
       <div className="container">
         <div className="head">
+          <span className="mncfix-kicker">Recognition</span>
           <h2>Certification</h2>
           <p>
             Internship Completion Certificate will be awarded. Certification is based on:

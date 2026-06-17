@@ -6,6 +6,7 @@ export default function ApplySection() {
       <span className="mncfix-blob mncfix-blob--brand mncfix-blob--a" aria-hidden="true"></span>
       <div className="container">
         <div className="mncfix-apply">
+          <span className="mncfix-kicker">Take the next step</span>
           <h2>Apply now</h2>
           <p>
             <i className="fa-solid fa-envelope" aria-hidden="true"></i>

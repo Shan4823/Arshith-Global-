@@ -154,6 +154,7 @@ export default function DurationSection() {
           viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
+          <span className="mncfix-kicker">Choose your path</span>
           <h2>Internship duration</h2>
           <p>
             Choose the plan that fits your learning speed and goals. Please note that these
