@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { body } from 'express-validator';
 import ContactEnquiry from '../models/ContactEnquiry.js';
 import validate from '../middleware/validate.js';
+import ensureDB from '../middleware/ensureDB.js';
 import { formRateLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
@@ -12,6 +13,7 @@ const SOURCE_PAGES = ['home', 'internship', 'latestnews', ''];
 router.post(
   '/contact',
   formRateLimiter,
+  ensureDB,
   [
     body('name').trim().notEmpty().withMessage('Name is required').isLength({ max: 120 }).escape(),
     body('email').trim().notEmpty().withMessage('Email is required').isEmail().withMessage('Invalid email').normalizeEmail(),

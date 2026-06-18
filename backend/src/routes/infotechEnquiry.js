@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { body } from 'express-validator';
 import InfoTechEnquiry from '../models/InfoTechEnquiry.js';
 import validate from '../middleware/validate.js';
+import ensureDB from '../middleware/ensureDB.js';
 import { formRateLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
@@ -20,6 +21,7 @@ const SERVICE_OPTIONS = [
 router.post(
   '/infotech-enquiry',
   formRateLimiter,
+  ensureDB,
   [
     body('firstName').trim().notEmpty().withMessage('First name is required').isLength({ max: 80 }).escape(),
     body('lastName').trim().notEmpty().withMessage('Last name is required').isLength({ max: 80 }).escape(),
