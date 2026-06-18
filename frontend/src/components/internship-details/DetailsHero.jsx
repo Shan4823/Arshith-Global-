@@ -137,25 +137,31 @@ export default function DetailsHero() {
       <section className="section mncfix-decorated">
         <span className="mncfix-blob mncfix-blob--brand mncfix-blob--c" aria-hidden="true" />
         <div className="container">
-          <motion.p
+          <motion.div
             className="mncfix-intro"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            Arshith Fresh India Pvt. Ltd. &amp; Suntech Solutions are pleased to propose an
-            Internship Program designed to provide students with practical exposure and
-            industry-relevant skills in Web Development, UI/UX Design, and Cloud Technologies.
-            This program is designed for undergraduate students, including both Degree and
-            B.Tech students, with a primary focus on 3rd Year B.Tech pursuing students. The
-            program aims to bridge the gap between academic learning and real-time industry
-            requirements through hands-on experience in live projects, helping students develop
-            both technical expertise and professional competencies. Additionally, this
-            internship is structured to enhance placement readiness, improve employability
-            skills, and prepare students to confidently participate in campus recruitment drives
-            and job opportunities within the organization.
-          </motion.p>
+            <i className="fa-solid fa-quote-left mncfix-intro-quote" aria-hidden="true" />
+            <span className="mncfix-kicker">Program Overview</span>
+            <p>
+              Arshith Fresh India Pvt. Ltd. &amp; Suntech Solutions are pleased to propose an
+              Internship Program designed to provide students with practical exposure and
+              industry-relevant skills in{' '}
+              <strong>Web Development, UI/UX Design, and Cloud Technologies</strong>. This
+              program is designed for undergraduate students, including both Degree and
+              B.Tech students, with a primary focus on{' '}
+              <strong>3rd Year B.Tech pursuing students</strong>. The program aims to bridge
+              the gap between academic learning and real-time industry requirements through
+              hands-on experience in live projects, helping students develop both technical
+              expertise and professional competencies. Additionally, this internship is
+              structured to enhance <strong>placement readiness</strong>, improve
+              employability skills, and prepare students to confidently participate in campus
+              recruitment drives and job opportunities within the organization.
+            </p>
+          </motion.div>
         </div>
       </section>
     </>
