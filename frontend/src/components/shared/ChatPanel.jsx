@@ -1,17 +1,25 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import chatbotLogo from '../../assets/chatbot-logo.png';
+
+// ─── Brand palette — sampled from the chatbot logo (deep forest green ring/letter,
+// magenta + blue accent dots) ───────────────────────────────────────────────
+const BRAND = '#1f4a3a';
+const BRAND_DARK = '#173529';
+const MAGENTA = '#c23f8d';
+const BLUE = '#4f8fb3';
 
 // ─── Theme tokens (scoped — never touches page CSS variables) ─────────────────
 const LIGHT = {
   bg: '#ffffff',
   sidebar: '#f8fafc',
   sidebarBorder: '#e2e8f0',
-  header: 'linear-gradient(160deg, #3db256 0%, #35a74d 100%)',
+  header: `linear-gradient(160deg, ${BRAND} 0%, ${BRAND_DARK} 100%)`,
   surface: '#f8fafc',
   botBubble: '#ffffff',
   botBubbleBorder: '#e2e8f0',
-  userBubble: '#3db256',
+  userBubble: BRAND,
   userText: '#ffffff',
   botText: '#1e293b',
   text: '#1e293b',
@@ -20,21 +28,21 @@ const LIGHT = {
   inputBg: '#f8fafc',
   cardBg: '#ffffff',
   cardBorder: '#e2e8f0',
-  cardHover: '#f0fdf4',
-  accent: '#3db256',
-  btnHover: 'rgba(61,178,86,0.08)',
+  cardHover: '#eef6f1',
+  accent: BRAND,
+  btnHover: 'rgba(31,74,58,0.08)',
   shadow: '0 20px 60px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.06)',
-  activeConv: '#ecfdf5',
+  activeConv: '#e7f3ec',
 };
 const DARK = {
   bg: '#111827',
   sidebar: '#1f2937',
   sidebarBorder: '#374151',
-  header: 'linear-gradient(135deg, #166534 0%, #15803d 60%, #16a34a 100%)',
+  header: `linear-gradient(135deg, #0d2a20 0%, ${BRAND_DARK} 60%, ${BRAND} 100%)`,
   surface: '#111827',
   botBubble: '#1f2937',
   botBubbleBorder: '#374151',
-  userBubble: '#16a34a',
+  userBubble: '#2c6b54',
   userText: '#ffffff',
   botText: '#f3f4f6',
   text: '#f9fafb',
@@ -43,11 +51,11 @@ const DARK = {
   inputBg: '#1f2937',
   cardBg: '#1f2937',
   cardBorder: '#374151',
-  cardHover: '#263340',
-  accent: '#4ade80',
+  cardHover: '#1c2f28',
+  accent: '#3aa179',
   btnHover: 'rgba(255,255,255,0.07)',
   shadow: '0 20px 60px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3)',
-  activeConv: '#14532d',
+  activeConv: BRAND_DARK,
 };
 
 const SUGGESTIONS = [
@@ -80,23 +88,52 @@ function renderMarkdown(raw) {
 }
 
 // ─── Atoms ────────────────────────────────────────────────────────────────────
-function SparkleIcon({ size = 16, color = '#fff' }) {
+// Two small dots echoing the logo's magenta + blue accents, bobbing independently.
+function AccentDots({ size = 28 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true" style={{ flexShrink: 0 }}>
-      <path d="M12 2L13.9 10.1L22 12L13.9 13.9L12 22L10.1 13.9L2 12L10.1 10.1Z" />
-    </svg>
+    <>
+      <motion.span
+        aria-hidden="true"
+        animate={{ y: [0, -3, 0], x: [0, 1, 0] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+        style={{
+          position: 'absolute', top: -size * 0.08, right: -size * 0.14,
+          width: size * 0.3, height: size * 0.3, borderRadius: '50%',
+          background: MAGENTA, boxShadow: '0 2px 6px rgba(194,63,141,0.5)',
+        }}
+      />
+      <motion.span
+        aria-hidden="true"
+        animate={{ y: [0, 3, 0], x: [0, -1, 0] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+        style={{
+          position: 'absolute', top: size * 0.2, right: -size * 0.24,
+          width: size * 0.22, height: size * 0.22, borderRadius: '50%',
+          background: BLUE, boxShadow: '0 2px 6px rgba(79,143,179,0.5)',
+        }}
+      />
+    </>
   );
 }
 
 function BotAvatar({ size = 28 }) {
   return (
     <div style={{
+      position: 'relative',
       width: size, height: size, borderRadius: '50%', flexShrink: 0,
-      background: 'linear-gradient(135deg, #3db256 0%, #35a74d 100%)',
+      background: `linear-gradient(135deg, ${BRAND} 0%, ${BRAND_DARK} 100%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      boxShadow: '0 3px 10px rgba(61,178,86,0.4)',
+      boxShadow: '0 3px 10px rgba(23,53,41,0.45)',
+      padding: size * 0.12,
     }}>
-      <SparkleIcon size={Math.round(size * 0.48)} />
+      <motion.img
+        src={chatbotLogo}
+        alt=""
+        animate={{ rotate: [-6, 6, -6], y: [0, -1.5, 0] }}
+        transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+      />
+      <AccentDots size={size} />
     </div>
   );
 }
@@ -112,10 +149,12 @@ function UserAvatar({ size = 28 }) {
   );
 }
 
-function TypingDots({ color = '#94a3b8' }) {
+const DOT_COLORS = [BRAND, MAGENTA, BLUE];
+
+function TypingDots() {
   return (
     <div style={{ display: 'flex', gap: 5, alignItems: 'center', padding: '3px 2px' }}>
-      {[0, 1, 2].map(i => (
+      {DOT_COLORS.map((color, i) => (
         <motion.span
           key={i}
           animate={{ y: [0, -5, 0], opacity: [0.5, 1, 0.5] }}
@@ -220,7 +259,7 @@ function ChatbotParticles({ isDark }) {
     renderer.setClearColor(0x000000, 0);
     el.appendChild(renderer.domElement);
 
-    const COLOR = isDark ? 0x4ade80 : 0x3db256;
+    const COLOR = isDark ? 0x3aa179 : 0x1f4a3a;
     const COUNT = 28;
 
     const posArr = new Float32Array(COUNT * 3);
@@ -329,13 +368,8 @@ function WelcomeScreen({ onSuggest, t, isDark }) {
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.05, duration: 0.4, type: 'spring', stiffness: 200 }}
-          style={{
-            width: 52, height: 52, borderRadius: '50%', margin: '0 auto 10px',
-            background: 'linear-gradient(135deg, #3db256 0%, #35a74d 100%)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 6px 20px rgba(61,178,86,0.35)',
-          }}
-        ><SparkleIcon size={24} /></motion.div>
+          style={{ width: 52, margin: '0 auto 10px' }}
+        ><BotAvatar size={52} /></motion.div>
         <motion.h2
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
@@ -372,6 +406,7 @@ function WelcomeScreen({ onSuggest, t, isDark }) {
             style={{
               background: t.cardBg,
               border: `1px solid ${t.cardBorder}`,
+              borderTop: `3px solid ${DOT_COLORS[i % DOT_COLORS.length]}`,
               borderRadius: 10,
               padding: '9px 9px',
               cursor: 'pointer',
@@ -433,7 +468,7 @@ function Sidebar({ conversations, activeId, onNew, onSwitch, onClose, isDark, on
             onClick={onNew}
             style={{
               width: '100%',
-              background: 'linear-gradient(135deg, #3db256, #2d6a4f)',
+              background: `linear-gradient(135deg, ${BRAND}, ${BRAND_DARK})`,
               color: '#fff', border: 'none', borderRadius: 8,
               padding: '8px 12px', cursor: 'pointer', fontSize: 12.5, fontWeight: 600,
               display: 'flex', alignItems: 'center', gap: 6, textAlign: 'left',
@@ -520,7 +555,16 @@ function Header({ onMenu, onToggleDark, onClear, onClose, isDark, hasMessages, t
       display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
     }}>
       {btn('menu', 'Open sidebar', onMenu, '☰')}
-      <div style={{ width: 32, height: 32, borderRadius: '50%', flexShrink: 0, border: '2px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><SparkleIcon size={14} /></div>
+      <div style={{ position: 'relative', width: 32, height: 32, borderRadius: '50%', flexShrink: 0, border: '2px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4 }}>
+        <motion.img
+          src={chatbotLogo}
+          alt=""
+          animate={{ rotate: [-6, 6, -6], y: [0, -1.5, 0] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        />
+        <AccentDots size={32} />
+      </div>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>Arshith Assistant</div>
         <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -576,12 +620,12 @@ function InputBar({ value, onChange, onSend, onKeyDown, isLoading, inputRef, t }
             width: 36, height: 36, borderRadius: 9, border: 'none',
             cursor: canSend ? 'pointer' : 'default', flexShrink: 0,
             background: canSend
-              ? 'linear-gradient(135deg, #3db256, #2d6a4f)'
+              ? `linear-gradient(135deg, ${BRAND}, ${BRAND_DARK})`
               : (t.border),
             color: '#fff', fontSize: 17,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             transition: 'background 0.2s, box-shadow 0.2s',
-            boxShadow: canSend ? '0 4px 12px rgba(61,178,86,0.4)' : 'none',
+            boxShadow: canSend ? '0 4px 12px rgba(31,74,58,0.4)' : 'none',
           }}
         >↑</motion.button>
       </div>
@@ -708,7 +752,7 @@ export default function ChatPanel({
                   border: `1px solid ${t.botBubbleBorder}`,
                   boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
                 }}>
-                  <TypingDots color={t.muted} />
+                  <TypingDots />
                 </div>
               </motion.div>
             )}
