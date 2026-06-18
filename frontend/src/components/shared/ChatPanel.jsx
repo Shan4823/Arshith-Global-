@@ -356,7 +356,8 @@ function WelcomeScreen({ onSuggest, t, isDark }) {
       style={{
         position: 'relative',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        padding: '20px 14px 10px', gap: 16, flex: 1, overflowY: 'auto',
+        padding: '26px 18px 14px', gap: 18, flex: 1, overflowY: 'auto',
+        background: `radial-gradient(circle at 50% 0%, ${BRAND}1a, transparent 62%), radial-gradient(circle at 100% 35%, ${MAGENTA}12, transparent 55%)`,
       }}
     >
       {/* Three.js particle background */}
@@ -368,19 +369,35 @@ function WelcomeScreen({ onSuggest, t, isDark }) {
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.05, duration: 0.4, type: 'spring', stiffness: 200 }}
-          style={{ width: 52, margin: '0 auto 10px' }}
-        ><BotAvatar size={52} /></motion.div>
+          style={{ width: 72, margin: '0 auto 14px', position: 'relative' }}
+        >
+          <motion.div
+            aria-hidden="true"
+            animate={{ scale: [1, 1.18, 1], opacity: [0.55, 0.85, 0.55] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              position: 'absolute', inset: -16, borderRadius: '50%', zIndex: -1,
+              background: `radial-gradient(circle, ${BRAND}40, ${MAGENTA}26 55%, transparent 75%)`,
+              filter: 'blur(7px)',
+            }}
+          />
+          <BotAvatar size={72} />
+        </motion.div>
         <motion.h2
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          style={{ fontSize: 17, fontWeight: 700, color: t.text, margin: '0 0 5px', letterSpacing: '-0.02em' }}
+          style={{
+            fontSize: 21, fontWeight: 800, margin: '0 0 7px', letterSpacing: '-0.02em',
+            background: `linear-gradient(120deg, ${BRAND}, ${MAGENTA} 55%, ${BLUE})`,
+            WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent',
+          }}
         >Arshith Assistant</motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.22 }}
-          style={{ fontSize: 12, color: t.muted, margin: 0, lineHeight: 1.5, maxWidth: 240 }}
+          style={{ fontSize: 12.5, color: t.muted, margin: 0, lineHeight: 1.55, maxWidth: 270 }}
         >
           Ask me anything about Arshith Group — services, internships, and more.
         </motion.p>
@@ -392,34 +409,45 @@ function WelcomeScreen({ onSuggest, t, isDark }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
         style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7,
           width: '100%', maxWidth: 320,
           position: 'relative', zIndex: 1,
         }}
       >
-        {SUGGESTIONS.map((s, i) => (
-          <motion.button
-            key={i}
-            whileHover={{ scale: 1.03, background: t.cardHover }}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => onSuggest(s.q)}
-            style={{
-              background: t.cardBg,
-              border: `1px solid ${t.cardBorder}`,
-              borderTop: `3px solid ${DOT_COLORS[i % DOT_COLORS.length]}`,
-              borderRadius: 10,
-              padding: '9px 9px',
-              cursor: 'pointer',
-              textAlign: 'left',
-              color: t.text,
-              transition: 'all 0.15s',
-              boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
-            }}
-          >
-            <div style={{ fontSize: 17, marginBottom: 4, lineHeight: 1 }}>{s.icon}</div>
-            <div style={{ fontSize: 11, fontWeight: 500, lineHeight: 1.35 }}>{s.label}</div>
-          </motion.button>
-        ))}
+        <p style={{
+          fontSize: 10.5, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+          color: t.muted, margin: '0 0 9px 3px',
+        }}>Quick questions</p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          {SUGGESTIONS.map((s, i) => {
+            const accent = DOT_COLORS[i % DOT_COLORS.length];
+            return (
+              <motion.button
+                key={i}
+                whileHover={{ y: -3, boxShadow: `0 12px 22px ${accent}30`, borderColor: accent }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => onSuggest(s.q)}
+                style={{
+                  background: t.cardBg,
+                  border: `1.5px solid ${t.cardBorder}`,
+                  borderRadius: 14,
+                  padding: '12px 11px',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  color: t.text,
+                  display: 'flex', flexDirection: 'column', gap: 9,
+                  boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+                }}
+              >
+                <span style={{
+                  width: 32, height: 32, borderRadius: 10, lineHeight: 1,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 16, background: `${accent}1f`,
+                }}>{s.icon}</span>
+                <span style={{ fontSize: 11.5, fontWeight: 600, lineHeight: 1.35 }}>{s.label}</span>
+              </motion.button>
+            );
+          })}
+        </div>
       </motion.div>
     </motion.div>
   );
@@ -551,11 +579,11 @@ function Header({ onMenu, onToggleDark, onClear, onClose, isDark, hasMessages, t
 
   return (
     <div style={{
-      background: t.header, padding: '10px 12px',
-      display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
+      background: t.header, padding: '12px 14px',
+      display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0,
     }}>
       {btn('menu', 'Open sidebar', onMenu, '☰')}
-      <div style={{ position: 'relative', width: 32, height: 32, borderRadius: '50%', flexShrink: 0, border: '2px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4 }}>
+      <div style={{ position: 'relative', width: 36, height: 36, borderRadius: '50%', flexShrink: 0, border: '2px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4 }}>
         <motion.img
           src={chatbotLogo}
           alt=""
@@ -563,11 +591,11 @@ function Header({ onMenu, onToggleDark, onClear, onClose, isDark, hasMessages, t
           transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
-        <AccentDots size={32} />
+        <AccentDots size={36} />
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>Arshith Assistant</div>
-        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', display: 'flex', alignItems: 'center', gap: 4 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>Arshith Assistant</div>
+        <div style={{ fontSize: 10.5, color: 'rgba(255,255,255,0.75)', display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#86efac', display: 'inline-block' }} />
           Online
         </div>
@@ -685,7 +713,7 @@ export default function ChatPanel({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.94, y: 18 }}
       transition={{ duration: 0.24, ease: [0.25, 0.8, 0.25, 1] }}
-      className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[380px] sm:h-[580px] sm:rounded-2xl"
+      className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[408px] sm:h-[680px] sm:rounded-2xl"
       style={{
         zIndex: 9999,
         background: t.bg,
