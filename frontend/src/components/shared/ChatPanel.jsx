@@ -166,6 +166,32 @@ function TypingDots() {
   );
 }
 
+const TYPING_PHASES = ['Thinking', 'Typing', 'Replying'];
+
+// Cycles through status words alongside the dots while a reply is pending.
+function TypingIndicator({ t }) {
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setPhase(p => (p + 1) % TYPING_PHASES.length), 1400);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <TypingDots />
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={phase}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.22 }}
+          style={{ fontSize: 11, fontWeight: 600, color: t.muted }}
+        >{TYPING_PHASES[phase]}…</motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function CopyBtn({ text, t }) {
   const [done, setDone] = useState(false);
   const copy = async () => {
@@ -780,7 +806,7 @@ export default function ChatPanel({
                   border: `1px solid ${t.botBubbleBorder}`,
                   boxShadow: '0 2px 8px rgba(0,0,0,0.07)',
                 }}>
-                  <TypingDots />
+                  <TypingIndicator t={t} />
                 </div>
               </motion.div>
             )}
