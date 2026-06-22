@@ -159,4 +159,91 @@ deliberately preserves, per the zero-visual-change requirement:
   `.ag-footer-cols`/`.ag-footer-inner`/`.ag-footer-brand p` all resolve to the
   expected cascade-merged values at both desktop and mobile viewport widths.
 
+---
+
+# Chatbot Implementation
+
+## Overview
+The "Arshith Assistant" chatbot (floating widget on every page, backed by the
+Gemini API) went through a reliability fix and a full visual rebrand. This
+section is a running audit of that work, tracked here as the project's
+general implementation log.
+
+## Backend Reliability Fix
+**Symptom:** the first chat message after any period of inactivity failed
+with "Sorry, I couldn't reach the server right now" — every message after
+that worked fine.
+
+**Root cause:** `backend/api/index.js` awaited a MongoDB connection
+(`connectDB()`) before handing *any* request to Express, including
+`/api/chat`, which never touches the database. On Vercel, serverless
+functions go cold after idle time, so the first request after a cold start
+had to both spin up the function and establish a fresh MongoDB Atlas
+connection (TLS handshake can take seconds or transiently fail) before the
+chat logic ever ran.
+
+**Fix:**
+- `backend/src/config/db.js` — `connectDB()` now caches and returns the
+  connection promise instead of reconnecting on every call, clearing the
+  cache on failure so the next attempt retries.
+- `backend/src/middleware/ensureDB.js` (new) — connects the DB only for
+  routes that actually need it.
+- `backend/src/routes/contact.js` / `backend/src/routes/infotechEnquiry.js`
+  — the only two routes that write to Mongo — now use `ensureDB`.
+- `backend/api/index.js` — no longer blocks every request on the DB;
+  `/api/chat` and `/api/health` respond immediately with no Mongo
+  dependency.
+
+## Visual Rebrand
+- **Logo**: replaced with a new "A" mark (speech-bubble ring, deep forest
+  green ink, magenta + blue accent dots) at
+  `frontend/src/assets/chatbot-logo.png`.
+- **Palette** (`frontend/src/components/shared/ChatPanel.jsx`): retired the
+  original bright-green theme for brand colors sampled from the new logo —
+  deep forest green (`#1f4a3a` / `#173529`) for the header, user bubbles,
+  buttons, and particle background; magenta (`#c23f8d`) and blue (`#4f8fb3`)
+  as recurring accent colors (typing dots, suggestion-card accents, avatar
+  decoration).
+- **Welcome screen redesign**: panel enlarged (380×580 → 408×680); hero
+  avatar enlarged with a pulsing brand-colored glow halo; "Arshith
+  Assistant" heading rendered as a green→magenta→blue gradient; suggestion
+  cards redesigned with color-tinted icon chips under a "Quick Questions"
+  label, with a colored lift/glow on hover.
+
+## Motion / Animation
+- FAB button continuously bounces and wiggles, with two small accent dots
+  (magenta + blue) bobbing independently near it — echoing the logo's dots.
+- Bot avatar (header, message bubbles, welcome hero) gently rotates/bobs on
+  a loop, with matching accent dots orbiting it.
+- Typing indicator: the three colored dots now sit beside status text that
+  cycles every 1.4s through "Thinking…" → "Typing…" → "Replying…"
+  (`TypingIndicator` in `ChatPanel.jsx`).
+- Idle-nudge speech bubble (`ChatWidget.jsx`): while the chat is closed, a
+  "👋 Can I help you with something?" bubble appears near the FAB 4s after
+  page load, stays visible for 7s, and re-appears every 50s until the
+  visitor opens the chat or dismisses it via its own ✕ button.
+
+## Files Changed
+```
+backend/api/index.js
+backend/src/config/db.js
+backend/src/middleware/ensureDB.js          (new)
+backend/src/routes/contact.js
+backend/src/routes/infotechEnquiry.js
+frontend/src/assets/chatbot-logo.png
+frontend/src/components/shared/ChatPanel.jsx
+frontend/src/components/shared/ChatWidget.jsx
+```
+
+## Verification
+- `npm run build` succeeds with no new errors/warnings beyond the
+  pre-existing chunk-size notice for the Three.js-containing `ChatWidget`
+  bundle.
+- Visually verified via a headless-Chromium (Playwright) script driving the
+  dev server: FAB idle animation + accent dots, welcome screen in light and
+  dark mode, all six suggestion cards fitting without scroll, the typing
+  indicator cycling through its status phases, and the idle-nudge bubble
+  appearing/dismissing correctly. No new console errors introduced (the only
+  network failure observed — a Font Awesome CDN stylesheet — is pre-existing
+  and unrelated).
 
