@@ -1,4 +1,4 @@
-import { INTERNSHIP_APPLY_FORM_URL } from '../../lib/constants';
+import InternshipApplicationForm from './InternshipApplicationForm';
 
 export default function ApplySection() {
   return (
@@ -16,14 +16,7 @@ export default function ApplySection() {
             <i className="fa-solid fa-phone" aria-hidden="true"></i>
             Contact: <strong>+91 86184 71424</strong>
           </p>
-          <a
-            href={INTERNSHIP_APPLY_FORM_URL}
-            className="mncfix-apply-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Apply for Internship →
-          </a>
+          <InternshipApplicationForm />
         </div>
       </div>
     </section>

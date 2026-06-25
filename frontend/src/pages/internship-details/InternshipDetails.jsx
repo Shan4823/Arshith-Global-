@@ -14,7 +14,6 @@ import CertificationSection from '../../components/internship-details/Certificat
 import RegistrationSection from '../../components/internship-details/RegistrationSection';
 import ApplySection from '../../components/internship-details/ApplySection';
 import VideoCtaSection from '../../components/shared/VideoCtaSection';
-import { INTERNSHIP_APPLY_FORM_URL } from '../../lib/constants';
 import ChatWidget from '../../components/shared/ChatWidget';
 
 export default function InternshipDetails() {
@@ -40,9 +39,7 @@ export default function InternshipDetails() {
           heading="Take the next step in your career"
           subtext="Secure your spot in our 6-month internship program with certification and placement support."
           ctaLabel="Apply for Internship →"
-          ctaHref={INTERNSHIP_APPLY_FORM_URL}
-          ctaTarget="_blank"
-          ctaRel="noopener noreferrer"
+          ctaHref="#apply"
         />
       </div>
       <FarmFooter />

@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { VIEWPORT_ONCE, tapScale } from '../../lib/motion';
-import { INTERNSHIP_APPLY_FORM_URL } from '../../lib/constants';
 
 export default function ApplySidebar() {
   return (
@@ -23,10 +22,8 @@ export default function ApplySidebar() {
           </li>
         </ul>
         <motion.a
-          href={INTERNSHIP_APPLY_FORM_URL}
+          href="#apply"
           className="mncfix-apply-btn mncfix-apply-sidebar-btn"
-          target="_blank"
-          rel="noopener noreferrer"
           {...tapScale}
         >
           Apply for Internship →

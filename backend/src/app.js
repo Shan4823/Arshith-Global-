@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import healthRoute from './routes/health.js';
 import contactRoute from './routes/contact.js';
 import infotechEnquiryRoute from './routes/infotechEnquiry.js';
+import internshipApplicationRoute from './routes/internshipApplication.js';
 import chatRoute from './routes/chat.js';
 import errorHandler from './middleware/errorHandler.js';
 
@@ -58,6 +59,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.use('/api', healthRoute);
 app.use('/api', contactRoute);
 app.use('/api', infotechEnquiryRoute);
+app.use('/api', internshipApplicationRoute);
 app.use('/api', chatRoute);
 
 // 404 handler
