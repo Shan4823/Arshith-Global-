@@ -16,14 +16,12 @@ export default function InternshipApplicationForm() {
       variants={fadeUp}
     >
       <form className="mncfix-apply-form" noValidate onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="website"
-          tabIndex="-1"
-          autoComplete="off"
-          style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
-          aria-hidden="true"
-        />
+        {/* Honeypot - display:none (not just off-screen) so autofill reliably skips it;
+            a generic name like "website" gets auto-filled by some browsers' autofill
+            even with autocomplete="off", which silently makes real submissions look like spam. */}
+        <div style={{ display: 'none' }} aria-hidden="true">
+          <input type="text" name="hp_contact_field" tabIndex="-1" autoComplete="off" />
+        </div>
 
         <div className="mncfix-apply-form-row">
           <div className="mncfix-apply-form-group">
@@ -97,12 +95,16 @@ export default function InternshipApplicationForm() {
             )}
           </motion.button>
           {status === 'success' && (
-            <p className="mncfix-apply-form-success">
-              ✅ Thank you! Our team will review your application and reach out soon.
+            <p className="mncfix-apply-form-success" role="status">
+              <i className="fa-solid fa-circle-check" aria-hidden="true"></i>
+              Thank you! Our team will review your application and reach out soon.
             </p>
           )}
           {status === 'error' && (
-            <p className="mncfix-apply-form-error">⚠ {errorMessage}</p>
+            <p className="mncfix-apply-form-error" role="alert">
+              <i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+              {errorMessage}
+            </p>
           )}
         </div>
       </form>

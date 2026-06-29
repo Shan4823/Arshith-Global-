@@ -1,14 +1,15 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { VIEWPORT_ONCE, tapScale } from '../../lib/motion';
 
 export default function VideoCtaSection({ heading, subtext, ctaLabel, ctaHref, ctaTarget, ctaRel }) {
   const sectionRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const videoY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
+  const videoY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? ['0%', '0%'] : ['-6%', '6%']);
 
   return (
     <section className="mncfix-video-cta" ref={sectionRef}>

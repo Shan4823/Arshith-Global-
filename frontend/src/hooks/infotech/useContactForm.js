@@ -19,7 +19,7 @@ export default function useContactForm() {
       company: formData.get('company')?.trim(),
       service: formData.get('service') || '',
       message: formData.get('message')?.trim(),
-      website: formData.get('website') || '', // honeypot
+      website: formData.get('hp_contact_field') || '', // honeypot
     };
 
     setSubmitting(true);

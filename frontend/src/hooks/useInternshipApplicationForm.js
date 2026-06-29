@@ -20,7 +20,7 @@ export default function useInternshipApplicationForm() {
       domain: formData.get('domain'),
       resumeLink: formData.get('resumeLink')?.trim(),
       message: formData.get('message')?.trim(),
-      website: formData.get('website') || '', // honeypot
+      website: formData.get('hp_contact_field') || '', // honeypot
     };
 
     setStatus('submitting');

@@ -54,14 +54,12 @@ export default function InfoTechContactSection() {
           <div className="contact-form-wrap reveal-right">
             {!submitted && (
               <form className="contact-form" id="contactForm" onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  name="website"
-                  tabIndex="-1"
-                  autoComplete="off"
-                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
-                  aria-hidden="true"
-                />
+                {/* Honeypot - display:none (not just off-screen) so autofill reliably skips it;
+                    a generic name like "website" gets auto-filled by some browsers' autofill
+                    even with autocomplete="off", which silently makes real submissions look like spam. */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                  <input type="text" name="hp_contact_field" tabIndex="-1" autoComplete="off" />
+                </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="fname">First Name</label>

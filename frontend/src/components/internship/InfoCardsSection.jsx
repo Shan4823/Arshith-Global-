@@ -60,7 +60,9 @@ export default function InfoCardsSection({ id, title, description, cards, varian
     'mncfix-grid';
 
   return (
-    <section className="section" id={id}>
+    <section className="section mncfix-decorated" id={id}>
+      <span className="mncfix-blob mncfix-blob--brand mncfix-blob--a" aria-hidden="true"></span>
+      <span className="mncfix-blob mncfix-blob--gold mncfix-blob--c" aria-hidden="true"></span>
       <div className="container">
         <motion.div
           className="head"

@@ -56,7 +56,7 @@ function PricingCard({ months, price, tags, description, featured, applyHref }) 
             boxShadow: featured
               ? '0 24px 60px rgba(61,178,86,0.28), 0 6px 18px rgba(0,0,0,0.1)'
               : '0 16px 40px rgba(61,178,86,0.16), 0 4px 12px rgba(0,0,0,0.07)',
-            y: -4,
+            y: -8,
           }}
           transition={{ duration: 0.25 }}
           style={{ position: 'relative', overflow: 'hidden' }}

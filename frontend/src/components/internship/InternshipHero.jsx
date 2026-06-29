@@ -72,15 +72,16 @@ export default function InternshipHero() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 + i * 0.1, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -4, boxShadow: '0 12px 28px rgba(0, 108, 73, 0.18)' }}
                   style={{
-                    background: 'rgba(61,178,86,0.08)',
-                    border: '1.5px solid rgba(61,178,86,0.25)',
+                    background: 'var(--brand-grad-soft)',
+                    border: '1.5px solid rgba(0, 108, 73, 0.25)',
                     borderRadius: 12, padding: '8px 16px',
                     textAlign: 'center', backdropFilter: 'blur(4px)',
+                    cursor: 'default',
                   }}
                 >
-                  <div style={{ fontSize: 18, fontWeight: 800, color: '#3db256', lineHeight: 1.1 }}>{value}</div>
+                  <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--brand)', lineHeight: 1.1 }}>{value}</div>
                   <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>{label}</div>
                 </motion.div>
               ))}

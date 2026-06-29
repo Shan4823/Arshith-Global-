@@ -17,14 +17,12 @@ export default function ContactSection({ sourcePage = '' }) {
 
         <div className="ag-contact-form-wrap">
           <form className="ag-contact-form" id="agContactForm" noValidate onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="website"
-              tabIndex="-1"
-              autoComplete="off"
-              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
-              aria-hidden="true"
-            />
+            {/* Honeypot - display:none (not just off-screen) so autofill reliably skips it;
+                a generic name like "website" gets auto-filled by some browsers' autofill
+                even with autocomplete="off", which silently makes real submissions look like spam. */}
+            <div style={{ display: 'none' }} aria-hidden="true">
+              <input type="text" name="hp_contact_field" tabIndex="-1" autoComplete="off" />
+            </div>
             <div className="ag-form-row">
               <div className="ag-form-group">
                 <label htmlFor="contactName">Full Name</label>
