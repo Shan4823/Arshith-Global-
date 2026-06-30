@@ -1954,6 +1954,8 @@
   }
 
   .ag-contact-form-wrap {
+    position: relative;
+    z-index: 1;
     max-width: 720px;
     margin: 0 auto;
     background: #f8f9fa;
@@ -1986,6 +1988,11 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #444;
+    transition: color 0.2s;
+  }
+
+  .ag-form-group:focus-within label {
+    color: #004b8d;
   }
 
   .ag-form-group input,
@@ -2001,7 +2008,8 @@
     outline: none;
     transition:
       border-color 0.2s,
-      box-shadow 0.2s;
+      box-shadow 0.2s,
+      transform 0.2s;
     resize: none;
     border-radius: 0;
     -webkit-appearance: none;
@@ -2013,6 +2021,7 @@
   .ag-form-group textarea:focus {
     border-color: #004b8d;
     box-shadow: 0 0 0 3px rgba(0, 75, 141, 0.1);
+    transform: translateY(-1px);
   }
 
   .ag-form-group input::placeholder,
@@ -2032,7 +2041,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background: #004b8d;
+    background: linear-gradient(135deg, #004b8d, #0066b8);
     color: #fff;
     border: none;
     padding: 14px 32px;
@@ -2041,14 +2050,19 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 75, 141, 0.25);
     transition:
       background 0.25s,
-      gap 0.25s;
+      gap 0.25s,
+      box-shadow 0.25s,
+      transform 0.25s;
   }
 
   .ag-form-btn:hover {
-    background: #003570;
+    background: linear-gradient(135deg, #003570, #00518f);
     gap: 16px;
+    box-shadow: 0 14px 32px rgba(0, 75, 141, 0.32);
+    transform: translateY(-2px);
   }
 
   .ag-form-success {
@@ -2075,7 +2089,9 @@
 
   /* ── Contact page info cards ── */
   .ag-contact-info-strip {
-    padding: 70px 0 0;
+    position: relative;
+    z-index: 5;
+    padding: 64px 0 80px;
     background: #fff;
   }
 
@@ -2086,23 +2102,37 @@
   }
 
   .ag-contact-info-card {
-    background: #f8f9fa;
-    border-top: 4px solid #004b8d;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
     padding: 32px 24px;
     text-align: center;
+    box-shadow: 0 20px 48px rgba(0, 20, 50, 0.12);
+  }
+
+  .ag-contact-info-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #004b8d, #0079c8);
   }
 
   .ag-contact-info-card i {
-    font-size: 1.6rem;
-    color: #004b8d;
-    width: 56px;
-    height: 56px;
+    font-size: 1.5rem;
+    color: #fff;
+    width: 60px;
+    height: 60px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: rgba(0, 75, 141, 0.08);
-    margin-bottom: 16px;
+    background: linear-gradient(135deg, #004b8d, #0079c8);
+    box-shadow: 0 0 0 7px rgba(0, 75, 141, 0.08);
+    margin-bottom: 18px;
   }
 
   .ag-contact-info-card a {
@@ -2141,6 +2171,43 @@
     .ag-contact-info-grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* ── Contact page form: decorated backdrop wrapping the shared form ── */
+  .ag-contact-decorated {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f2f7fc 0%, #ffffff 55%);
+  }
+
+  .ag-contact-decorated .ag-contact {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+  }
+
+  .ag-contact-decorated-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ag-contact-decorated-blob--a {
+    width: 420px;
+    height: 420px;
+    top: -140px;
+    left: -160px;
+    background: radial-gradient(circle, rgba(0, 75, 141, 0.12) 0%, transparent 70%);
+  }
+
+  .ag-contact-decorated-blob--b {
+    width: 360px;
+    height: 360px;
+    bottom: -150px;
+    right: -130px;
+    background: radial-gradient(circle, rgba(0, 75, 141, 0.1) 0%, transparent 70%);
   }
 
   /* ── About CEO page ── */

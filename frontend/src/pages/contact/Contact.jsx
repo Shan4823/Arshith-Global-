@@ -21,7 +21,15 @@ export default function Contact() {
       <main>
         <ContactHero />
         <ContactInfoStrip />
-        <motion.div initial="hidden" whileInView="show" viewport={VIEWPORT_ONCE} variants={fadeUp}>
+        <motion.div
+          className="ag-contact-decorated"
+          initial="hidden"
+          whileInView="show"
+          viewport={VIEWPORT_ONCE}
+          variants={fadeUp}
+        >
+          <span className="ag-contact-decorated-blob ag-contact-decorated-blob--a" aria-hidden="true" />
+          <span className="ag-contact-decorated-blob ag-contact-decorated-blob--b" aria-hidden="true" />
           <ContactSection sourcePage="contact" />
         </motion.div>
       </main>
