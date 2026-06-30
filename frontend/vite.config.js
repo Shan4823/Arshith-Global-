@@ -15,6 +15,7 @@ export default defineConfig({
         infotech: resolve(__dirname, 'infotech.html'),
         aboutinfotech: resolve(__dirname, 'about-infotech.html'),
         arshithinfotech: resolve(__dirname, 'arshithinfoTech.html'),
+        contact: resolve(__dirname, 'contact.html'),
       },
     },
   },

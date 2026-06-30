@@ -75,7 +75,7 @@ export default function Header({
             </div>
           </li>
           <li className="ag-nav-item">
-            <a href="#">Contact Us</a>
+            <a href="contact.html">Contact Us</a>
           </li>
         </ul>
         <div className="ag-nav-right">

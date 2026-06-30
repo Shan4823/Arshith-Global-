@@ -1959,6 +1959,7 @@
     background: #f8f9fa;
     padding: 40px;
     border-top: 4px solid #004b8d;
+    box-shadow: 0 24px 60px rgba(0, 75, 141, 0.08);
   }
 
   .ag-contact-form {
@@ -2072,6 +2073,76 @@
     }
   }
 
+  /* ── Contact page info cards ── */
+  .ag-contact-info-strip {
+    padding: 70px 0 0;
+    background: #fff;
+  }
+
+  .ag-contact-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .ag-contact-info-card {
+    background: #f8f9fa;
+    border-top: 4px solid #004b8d;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .ag-contact-info-card i {
+    font-size: 1.6rem;
+    color: #004b8d;
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 75, 141, 0.08);
+    margin-bottom: 16px;
+  }
+
+  .ag-contact-info-card a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .ag-contact-info-card a:hover {
+    color: #004b8d;
+  }
+
+  .ag-contact-info-card h4 {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+
+  .ag-contact-info-card p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 900px) {
+    .ag-contact-info-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .ag-contact-info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* ── About CEO page ── */
   .ag-eyebrow {
     display: block;
@@ -2124,6 +2195,269 @@
     max-width: 600px !important;
     margin: 0 auto !important;
     line-height: 1.8 !important;
+  }
+
+  /* ── Contact hero ── */
+  .ag-contact-hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ag-contact-hero--split {
+    text-align: left;
+    padding: 160px 0 100px !important;
+  }
+
+  .ag-contact-hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(8px);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ag-contact-hero-orb--a {
+    width: 360px;
+    height: 360px;
+    top: -120px;
+    left: -80px;
+    animation: agOrbFloat 9s ease-in-out infinite;
+  }
+
+  .ag-contact-hero-orb--b {
+    width: 260px;
+    height: 260px;
+    bottom: -100px;
+    right: -40px;
+    animation: agOrbFloat 11s ease-in-out infinite reverse;
+  }
+
+  .ag-contact-hero-orb--c {
+    width: 160px;
+    height: 160px;
+    top: 30%;
+    right: 12%;
+    animation: agOrbFloat 7s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  @keyframes agOrbFloat {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(24px, -18px) scale(1.08);
+    }
+  }
+
+  /* ── Split hero grid: copy left, image right ── */
+  .ag-contact-hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+    text-align: left;
+  }
+
+  @media (min-width: 900px) {
+    .ag-contact-hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+    }
+  }
+
+  .ag-contact-hero-content {
+    text-align: left;
+  }
+
+  .ag-contact-hero-content h1 {
+    text-align: left;
+  }
+
+  .ag-contact-hero-content p {
+    text-align: left;
+    margin: 0 0 6px !important;
+    max-width: 520px !important;
+  }
+
+  .ag-contact-hero-facts {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .ag-contact-hero-fact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    padding: 8px 16px;
+    backdrop-filter: blur(6px);
+  }
+
+  .ag-contact-hero-fact i {
+    color: #bcdcff;
+    font-size: 0.85rem;
+  }
+
+  .ag-contact-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    color: #004b8d;
+    border: none;
+    padding: 14px 30px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  /* ── Hero image: glow + glass-layer frame + floating cards ── */
+  .ag-contact-hero-media {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .ag-contact-hero-media-glow {
+    position: absolute;
+    inset: -10%;
+    z-index: 0;
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.25), transparent 60%),
+      radial-gradient(circle at 75% 75%, rgba(188, 220, 255, 0.3), transparent 60%);
+    filter: blur(40px);
+    animation: agGlowPulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes agGlowPulse {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  .ag-contact-hero-media-frame {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 30px 70px rgba(0, 20, 50, 0.35);
+  }
+
+  .ag-contact-hero-media-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ag-contact-hero-media-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(0, 75, 141, 0.25) 0%, rgba(0, 75, 141, 0) 55%);
+    pointer-events: none;
+  }
+
+  .ag-contact-hero-float-card {
+    position: absolute;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.92);
+    border-top: 3px solid #004b8d;
+    box-shadow: 0 16px 36px rgba(0, 20, 50, 0.22);
+  }
+
+  .ag-contact-hero-float-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .ag-contact-hero-float-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #004b8d;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .ag-contact-hero-float-text strong {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    white-space: nowrap;
+  }
+
+  .ag-contact-hero-float-text span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: #777;
+    white-space: nowrap;
+  }
+
+  .ag-contact-hero-float-card--a {
+    top: -18px;
+    right: -18px;
+  }
+
+  .ag-contact-hero-float-card--b {
+    bottom: -18px;
+    left: -18px;
+  }
+
+  @media (max-width: 600px) {
+    .ag-contact-hero-orb {
+      display: none;
+    }
+
+    .ag-contact-hero--split {
+      padding: 140px 0 70px !important;
+    }
+
+    .ag-contact-hero-media {
+      max-width: 320px;
+    }
+
+    .ag-contact-hero-float-text strong {
+      font-size: 0.7rem;
+    }
+
+    .ag-contact-hero-float-text span {
+      font-size: 0.6rem;
+    }
   }
 
   .ag-section {

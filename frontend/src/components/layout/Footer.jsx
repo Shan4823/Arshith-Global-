@@ -77,7 +77,7 @@ export default function Footer({ enableBackToTop = true }) {
               <li><a href="#">News</a></li>
               <li><a href="#">Business</a></li>
               <li><a href="#">Careers</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
             </ul>
           </div>
           <div className="ag-footer-col">
