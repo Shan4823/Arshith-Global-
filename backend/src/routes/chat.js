@@ -103,36 +103,39 @@ router.post('/chat', chatRateLimiter, async (req, res, next) => {
 
     const safeHistory = Array.isArray(history) ? history.slice(-20) : [];
 
-    const contents = safeHistory
-      .filter((entry) => entry && typeof entry.role === 'string' && typeof entry.text === 'string')
-      .map((entry) => ({
-        role: entry.role === 'bot' ? 'model' : 'user',
-        parts: [{ text: entry.text }],
-      }));
+    const messages = [
+      { role: 'system', content: FAQ_CONTEXT },
+      ...safeHistory
+        .filter((entry) => entry && typeof entry.role === 'string' && typeof entry.text === 'string')
+        .map((entry) => ({
+          role: entry.role === 'bot' ? 'assistant' : 'user',
+          content: entry.text,
+        })),
+      { role: 'user', content: message.trim() },
+    ];
 
-    contents.push({ role: 'user', parts: [{ text: message.trim() }] });
+    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages,
+        max_tokens: 512,
+      }),
+    });
 
-    const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents,
-          systemInstruction: { parts: [{ text: FAQ_CONTEXT }] },
-        }),
-      }
-    );
-
-    if (!geminiRes.ok) {
-      const errBody = await geminiRes.text();
-      console.error('Gemini API error:', geminiRes.status, errBody);
+    if (!groqRes.ok) {
+      const errBody = await groqRes.text();
+      console.error('Groq API error:', groqRes.status, errBody);
       return res.status(502).json({ success: false, message: "Sorry, I couldn't process that right now." });
     }
 
-    const data = await geminiRes.json();
+    const data = await groqRes.json();
     const reply =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      data.choices?.[0]?.message?.content ||
       "Sorry, I couldn't generate a response.";
 
     return res.json({ success: true, reply });
